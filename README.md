@@ -13,13 +13,15 @@ Operations RESTApi for day to day tasks.
 
 
 ## Technologies Used  
-  "devDependencies": {
+  "devDependencies": { 
+
     "@types/express": "^4.17.17",
     "nodemon": "^3.0.1",
     "swagger-autogen": "^2.23.6",
     "typescript": "^5.2.2"
   },
-  "dependencies": {
+  "dependencies": { 
+    
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",

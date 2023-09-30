@@ -83,6 +83,10 @@ export default class InventoryController {
             res.status(500).json({ message: 'Internal Server Error' }); // Corrected typo in the response message
         }
     }
+
+    public async addShipment(req:Request,res:Response):Promise<void>{
+        //#swagger.tags=['Stock']
+    }
 }
 
 
