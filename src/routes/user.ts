@@ -1,9 +1,16 @@
-const route = require('express').Router();
+import { Router } from 'express';
+import { Response, Request } from 'express';
+import UserController from '../controller/user';
+const userController = new UserController();
+const route = Router()
 
-route.get('/', (req, res, next) => {
-    res.json({message:"get a user user route"}); // Use res.send() to send a response
-    // Or use res.json() if you want to send JSON data: res.json({ message: "we are connected" });
-    // Next middleware or route handler should be called using next()
+
+route.post('/', async (req: Request, res: Response) => {
+    userController.createUser(req, res)
 });
+
+route.get('/login', async (req: Request, res: Response) => {
+    userController.userLogin(req, res)
+})
 
 module.exports = route;

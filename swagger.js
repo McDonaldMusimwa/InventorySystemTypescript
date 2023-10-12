@@ -7,9 +7,9 @@ const doc = {
     title: 'inventoryApi',        // by default: 'REST API'
     description: `Back end application for inventory management.`,  // by default: ''
   },
-  host: 'tasketor.onrender.com/',      // by default: 'localhost:3000'
+  host: 'localhost:8080',      // by default: 'localhost:3000'
   basePath: '',  // by default: '/'
-  schemes: ['https'],   // by default: ['http']
+  schemes: ['http'],   // by default: ['http']
   consumes: [],  // by default: ['application/json']
   produces: [],  // by default: ['application/json']
   tags: [        // by default: empty Array

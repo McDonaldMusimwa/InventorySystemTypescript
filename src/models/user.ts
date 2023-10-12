@@ -47,10 +47,8 @@ const oauthUserSchema = new Schema({
 });
 
 // Create models based on the schemas
-const User = model('User', userSchema, 'users');
-const OAuthUser = model('OAuthUser', oauthUserSchema, 'users');
+const   User = model('User', userSchema, 'users');
+//const OAuthUser = model('OAuthUser', oauthUserSchema, 'users');
 
-module.exports = {
-  User,
-  OAuthUser,
-};
+export default User;
+

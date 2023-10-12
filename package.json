@@ -17,7 +17,8 @@
   "author": "McDonald",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^4.17.17",
+    "@types/express": "^4.17.18",
+    "@types/express-session": "^1.17.8",
     "nodemon": "^3.0.1",
     "swagger-autogen": "^2.23.6",
     "typescript": "^5.2.2"
@@ -27,7 +28,11 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "swagger-ui-express": "^5.0.0",
     "ts-node": "^10.9.1"
   }

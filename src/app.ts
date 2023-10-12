@@ -1,21 +1,35 @@
-const express = require('express');
+import express from 'express';
 require('dotenv').config();
-const PORT = 8080;
-const swaggerUi = require('swagger-ui-express');
+const PORT = process.env.PORT;
 //database config
 const mongose = require('mongoose');
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 //Swagger
-import {swaggerUi} from 'swagger-ui-express' 
+import swaggerUi from 'swagger-ui-express' 
 const swaggerDocument = require( '../swagger-output.json');
+import passport from 'passport';
+import session from 'express-session';
+
 
 
 const DATABASEURL =process.env.DataBaseUrl;
-
+const SECRET = process.env.SECRET;
 
 
 
 const app = express();
+
+// Configure and start session
+app.use(session({
+  secret: SECRET, // Replace with a strong and secure secret
+  resave: false,
+  saveUninitialized: true,
+  // Additional session options go here, like store, cookie settings, etc.
+}));
+
+// Initialize Passport and configure it to use sessions
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes
 app.use(bodyParser.json());
@@ -33,7 +47,7 @@ mongose
   .then((result) => {
     app.listen(PORT);
     db = result;
-    console.log("connection to database successful");
+    console.log("connection to database successful =>");
   })
   .catch((err) => {
     console.log(err);

@@ -39,4 +39,13 @@ rout.delete('/deleteproduct', async (req: Request, res: Response, next: NextFunc
         res.status(500).json({ error: 'Internal Server Error first layer' })
     }
 })
+
+rout.post('/addshipment',async(req:Request,res:Response)=>{
+     await stockObject.addShipment(req,res)
+
+})
+
+rout.get('/shipments',async(req:Request,res:Response)=>{
+    await stockObject.getAllShipments(req,res);
+})
 module.exports = rout;
