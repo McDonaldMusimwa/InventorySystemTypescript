@@ -149,6 +149,21 @@ export default class InventoryController {
         }
     }
 
+    public async getAllShipmentsForAllProducts(req: Request, res: Response): Promise<void> {
+        //#swagger.tags=['Shipments']
+        try {
+
+            
+
+            const result = await ShipmentItem.find()
+            console.log(result)
+            res.status(200).json(result)
+
+
+        } catch (message) {
+            res.status(500).json({ message: 'Internal Server Error' })
+        }
+    }
     /*
     public async deleteShipment(req:Request,res:Response):Promise<void>{
         try{

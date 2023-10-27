@@ -48,4 +48,7 @@ rout.post('/addshipment',async(req:Request,res:Response)=>{
 rout.get('/shipments',async(req:Request,res:Response)=>{
     await stockObject.getAllShipments(req,res);
 })
+rout.get('/allshipments',async(req:Request,res:Response)=>{
+    await stockObject.getAllShipmentsForAllProducts(req,res);
+})
 module.exports = rout;

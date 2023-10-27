@@ -44,7 +44,7 @@ class UserController {
 
             const User = new UserModel.User(newUser); // Create a new user with the 'NewUser' model
             const createdUser = await User.save(); // Save the user to the database
-            res.status(200).json({ success: "created successfully" });
+            res.status(200).json({ message: "created successfully" });
             return { ...createdUser._doc, _id: createdUser.toString() };
 
         } catch (error) {

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const shipmentSchema = new mongoose_1.default.Schema({
+    productid: String,
     productname: String,
     productdescription: String,
     quantityreceived: Number,
@@ -12,13 +13,6 @@ const shipmentSchema = new mongoose_1.default.Schema({
     totalcost: Number,
     datereceived: Date,
 });
-const stockSchema = new mongoose_1.default.Schema({
-    productId: String,
-    productname: String,
-    totalquantity: Number,
-    totalcost: Number,
-    shipments: [shipmentSchema],
-});
-const StockItem = mongoose_1.default.model('Stock', stockSchema, 'stock');
-exports.default = StockItem;
-//# sourceMappingURL=stockitem.js.map
+const ShipmentItem = mongoose_1.default.model('Shipment', shipmentSchema, 'shipments');
+exports.default = ShipmentItem;
+//# sourceMappingURL=shipment.js.map
