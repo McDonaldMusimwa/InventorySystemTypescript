@@ -5,8 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const stockitem_1 = __importDefault(require("../models/stockitem"));
 const shipment_1 = __importDefault(require("../models/shipment"));
-//const { StockItem, InventoryItem } = require('../models/stockitem');
+const productItem_1 = __importDefault(require("../models/productItem"));
 class InventoryController {
+    async addProduct(req, res) {
+        try {
+            const { productId, productname, unitspercase, description, } = req.body;
+            if (!productId || !productname || !unitspercase) {
+                res.status(400).json({ error: 'Missing required fields' });
+            }
+            else {
+                const newProduct = {
+                    productId,
+                    productname,
+                    unitspercase,
+                    description
+                };
+                //console.log(newProduct)
+                const product = new productItem_1.default(newProduct);
+                await product.save();
+                res.status(201).json({ message: 'Inventory added successfully', inventory: product });
+            }
+        }
+        catch {
+            res.status(401).json({ message: "Internal server error" });
+        }
+    }
     async addInventory(req, res) {
         //#swagger.tags=['Stock']
         console.log(req.body);
@@ -72,12 +95,9 @@ class InventoryController {
     async addShipment(req, res) {
         //#swagger.tags=['Shipments']
         try {
-            const productId = req.query.productid;
+            const productId = req.body.productid;
             let product = await stockitem_1.default.findOne({ productId: productId });
             const { productname, productdescription, quantityreceived, cost, totalcost, datereceived } = req.body;
-            if (!product) {
-                res.status(401).json({ message: 'No product found' });
-            }
             const newShipment = {
                 productname,
                 productdescription,
@@ -127,6 +147,15 @@ class InventoryController {
         try {
             const result = await shipment_1.default.find();
             console.log(result);
+            res.status(200).json(result);
+        }
+        catch (message) {
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+    async getproductRange(req, res) {
+        try {
+            const result = await productItem_1.default.find();
             res.status(200).json(result);
         }
         catch (message) {

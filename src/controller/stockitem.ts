@@ -2,9 +2,42 @@ import { Request, Response } from 'express';
 import { InventoryItem, Shipment } from '../models/stockitem';
 import StockItem from '../models/stockitem';
 import ShipmentItem from '../models/shipment';
-//const { StockItem, InventoryItem } = require('../models/stockitem');
+import NewItem, { ProductItem } from '../models/productItem';
+
+
 
 export default class InventoryController {
+    public async addProduct(req: Request, res: Response): Promise<void> {
+        try {
+            const {
+                productId,
+                productname,
+                unitspercase,
+                description,
+
+            } = req.body as ProductItem;
+
+            if (!productId || !productname || !unitspercase) {
+                res.status(400).json({ error: 'Missing required fields' });
+            } else {
+                const newProduct: ProductItem = {
+                    productId,
+                    productname,
+                    unitspercase,
+                    description
+                };
+                //console.log(newProduct)
+                const product = new NewItem(newProduct);
+                await product.save();
+                res.status(201).json({ message: 'Inventory added successfully', inventory: product });
+            }
+
+        } catch {
+            res.status(401).json({ message: "Internal server error" })
+        }
+    }
+
+
     public async addInventory(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Stock']
         console.log(req.body)
@@ -82,7 +115,7 @@ export default class InventoryController {
     public async addShipment(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Shipments']
         try {
-            const productId = req.query.productid;
+            const productId = req.body.productid;
 
             let product = await StockItem.findOne({ productId: productId });
             const {
@@ -94,9 +127,7 @@ export default class InventoryController {
                 datereceived
             } = req.body as Shipment;
 
-            if (!product) {
-                res.status(401).json({ message: 'No product found' })
-            }
+
 
             const newShipment: Shipment = {
 
@@ -153,7 +184,7 @@ export default class InventoryController {
         //#swagger.tags=['Shipments']
         try {
 
-            
+
 
             const result = await ShipmentItem.find()
             console.log(result)
@@ -164,16 +195,16 @@ export default class InventoryController {
             res.status(500).json({ message: 'Internal Server Error' })
         }
     }
-    /*
-    public async deleteShipment(req:Request,res:Response):Promise<void>{
+    
+    public async getproductRange(req:Request,res:Response):Promise<void>{
         try{
-            const productid = req.query.productid;
-            const result = await st
+            const result = await NewItem.find()
+            res.status(200).json(result)
         }catch(message){
             res.status(500).json({message:'Internal Server Error'})
         }
     }
-*/
+
 }
 
 

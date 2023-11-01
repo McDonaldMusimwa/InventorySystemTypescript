@@ -40,8 +40,8 @@ app
     next();
 });
 app.use(express_1.default.json());
-app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 app.use("/", require("./routes/index"));
+app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
 const allowedOrigins = [
     'http://localhost:5173', // Add any other origins as needed
 ];
