@@ -1,11 +1,11 @@
-const rout = require('express').Router();
+const router = require('express').Router();
 
 import { NextFunction, Request, Response } from 'express';
 import StockController from '../controller/stockitem';
 let stockObject = new StockController();
 
 
-rout.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
     try {
         stockObject.getAllProducts(req, res)
 
@@ -15,7 +15,7 @@ rout.get('/', (req: Request, res: Response, next: NextFunction) => {
 
 });
 
-rout.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
 
 
 
@@ -27,7 +27,7 @@ rout.get('/getproductcatalogue', async (req: Request, res: Response, next: NextF
 
 
 
-rout.post('/addproduct', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/addproduct', async (req: Request, res: Response, next: NextFunction) => {
 
 
 
@@ -37,22 +37,23 @@ rout.post('/addproduct', async (req: Request, res: Response, next: NextFunction)
 
 })
 
-rout.delete('/deleteproduct', async (req: Request, res: Response, next: NextFunction) => {
+router.delete('/deleteproduct', async (req: Request, res: Response, next: NextFunction) => {
 
     await stockObject.deleteProduct(req, res)
 
 
 })
 
-rout.post('/addshipment', async (req: Request, res: Response) => {
+router.post('/addshipment', async (req: Request, res: Response) => {
     await stockObject.addShipment(req, res)
 
 })
 
-rout.get('/shipments', async (req: Request, res: Response) => {
-    await stockObject.getAllShipments(req, res);
+router.get('/productshipments', async (req: Request, res: Response) => {
+    await stockObject.getAllShipmentsForOneProduct(req, res);
 })
-rout.get('/allshipments', async (req: Request, res: Response) => {
+router.get('/allshipments', async (req: Request, res: Response) => {
+    
     await stockObject.getAllShipmentsForAllProducts(req, res);
-})
-module.exports = rout;
+});
+module.exports = router;

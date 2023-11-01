@@ -12,6 +12,7 @@ const shipmentSchema = new mongoose_1.default.Schema({
     cost: Number,
     totalcost: Number,
     datereceived: Date,
+    expirydate: Date
 });
 const ShipmentItem = mongoose_1.default.model('Shipment', shipmentSchema, 'shipments');
 exports.default = ShipmentItem;

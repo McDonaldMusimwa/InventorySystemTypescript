@@ -95,11 +95,21 @@
         }
       }
     },
+    "/stock/getproductcatalogue": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/stock/addproduct": {
       "post": {
-        "tags": [
-          "Stock"
-        ],
         "description": "",
         "parameters": [
           {
@@ -114,13 +124,10 @@
                 "productname": {
                   "example": "any"
                 },
-                "totalquantity": {
+                "unitspercase": {
                   "example": "any"
                 },
-                "totalcost": {
-                  "example": "any"
-                },
-                "shipments": {
+                "description": {
                   "example": "any"
                 }
               }
@@ -128,17 +135,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "201": {
             "description": "Created"
           },
           "400": {
             "description": "Bad Request"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -167,16 +171,14 @@
         "description": "",
         "parameters": [
           {
-            "name": "productid",
-            "in": "query",
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
+                "productid": {
+                  "example": "any"
+                },
                 "productname": {
                   "example": "any"
                 },
@@ -203,16 +205,13 @@
           "200": {
             "description": "OK"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/stock/shipments": {
+    "/stock/productshipments": {
       "get": {
         "tags": [
           "Shipments"
