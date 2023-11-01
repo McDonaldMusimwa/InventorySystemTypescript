@@ -10,6 +10,7 @@ export interface Shipment {
     cost: number;
     totalcost: number;
     datereceived: Date;
+    expirydate:Date;
 }
 
 
@@ -21,6 +22,7 @@ const shipmentSchema = new mongoose.Schema<Shipment>({
     cost: Number,
     totalcost: Number,
     datereceived: Date,
+    expirydate:Date
 });
 
 

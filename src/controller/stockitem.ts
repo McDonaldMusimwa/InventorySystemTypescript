@@ -92,6 +92,7 @@ export default class InventoryController {
         //#swagger.tags=['Stock']
         try {
             const result = await StockItem.find();
+            console.log(result)
             const resulte = result.map((product) => {
                 const totalquantity = product.shipments.reduce((total, shipment) => {
                     return total + shipment.quantityreceived
@@ -99,11 +100,14 @@ export default class InventoryController {
                 const totalcost = product.shipments.reduce((total, shipment) => {
                     return total + shipment.totalcost
                 }, 0)
+
+                const shipments = product.shipments
                 return {
                     productID: product.productId,
                     productname: product.productname,
                     totalquantity: totalquantity,
-                    totalcost: totalcost
+                    totalcost: totalcost,
+                    shipments:shipments
                 }
             })
             res.status(200).json(resulte);
@@ -164,7 +168,7 @@ export default class InventoryController {
         }
     }
 
-    public async getAllShipments(req: Request, res: Response): Promise<void> {
+    public async getAllShipmentsForOneProduct(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Shipments']
         try {
 
@@ -185,9 +189,9 @@ export default class InventoryController {
         try {
 
 
-
+            
             const result = await ShipmentItem.find()
-            console.log(result)
+            
             res.status(200).json(result)
 
 
