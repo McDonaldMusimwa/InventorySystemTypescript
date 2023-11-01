@@ -14,24 +14,14 @@ rout.get('/', (req, res, next) => {
         res.status(500).json({ message: 'Internal Server Error First layer' });
     }
 });
+rout.get('/getproductcatalogue', async (req, res, next) => {
+    await stockObject.getproductRange(req, res);
+});
 rout.post('/addproduct', async (req, res, next) => {
-    try {
-        const result = await stockObject.addInventory(req, res);
-        res.status(200).json(result);
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ error: 'Internal Server Error first layer' });
-    }
+    await stockObject.addProduct(req, res);
 });
 rout.delete('/deleteproduct', async (req, res, next) => {
-    try {
-        const result = await stockObject.deleteProduct(req, res);
-        res.status(200).json(result);
-    }
-    catch (error) {
-        res.status(500).json({ error: 'Internal Server Error first layer' });
-    }
+    await stockObject.deleteProduct(req, res);
 });
 rout.post('/addshipment', async (req, res) => {
     await stockObject.addShipment(req, res);

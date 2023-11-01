@@ -7,13 +7,23 @@ let stockObject = new StockController();
 
 rout.get('/', (req: Request, res: Response, next: NextFunction) => {
     try {
-         stockObject.getAllProducts(req, res)
-        
+        stockObject.getAllProducts(req, res)
+
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error First layer' })
     }
 
 });
+
+rout.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
+
+
+
+
+    await stockObject.getproductRange(req, res)
+
+
+})
 
 
 
@@ -21,34 +31,28 @@ rout.post('/addproduct', async (req: Request, res: Response, next: NextFunction)
 
 
 
-    try {
-        const result = await stockObject.addInventory(req, res)
-        res.status(200).json(result)
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: 'Internal Server Error first layer' })
-    }
+
+    await stockObject.addProduct(req, res)
+
 
 })
 
 rout.delete('/deleteproduct', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const result = await stockObject.deleteProduct(req, res)
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error first layer' })
-    }
-})
 
-rout.post('/addshipment',async(req:Request,res:Response)=>{
-     await stockObject.addShipment(req,res)
+    await stockObject.deleteProduct(req, res)
+
 
 })
 
-rout.get('/shipments',async(req:Request,res:Response)=>{
-    await stockObject.getAllShipments(req,res);
+rout.post('/addshipment', async (req: Request, res: Response) => {
+    await stockObject.addShipment(req, res)
+
 })
-rout.get('/allshipments',async(req:Request,res:Response)=>{
-    await stockObject.getAllShipmentsForAllProducts(req,res);
+
+rout.get('/shipments', async (req: Request, res: Response) => {
+    await stockObject.getAllShipments(req, res);
+})
+rout.get('/allshipments', async (req: Request, res: Response) => {
+    await stockObject.getAllShipmentsForAllProducts(req, res);
 })
 module.exports = rout;
