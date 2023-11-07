@@ -5,7 +5,8 @@ const PORT = process.env.PORT;
 const mongose = require('mongoose');
 import bodyParser from 'body-parser';
 //Swagger
-import swaggerUi from 'swagger-ui-express'
+const swaggerAutogen = require('swagger-autogen');
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger-output.json');
 import passport from 'passport';
 import session from 'express-session';
