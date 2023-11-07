@@ -136,10 +136,16 @@ class InventoryController {
     async getAllShipmentsForOneProduct(req, res) {
         //#swagger.tags=['Shipments']
         try {
-            const productid = req.query.productid;
-            const result = await shipment_1.default.find({ productid: productid });
-            console.log(result);
+            const productid = req.params.productid;
+            console.log(productid);
+            if (!productid) {
+                res.status(400).json({ message: 'productid query parameter is required' });
+                return;
+            }
+            console.log(productid);
+            const result = await stockitem_1.default.find({ productId: productid });
             res.status(200).json(result);
+            console.log('data =>' + result);
         }
         catch (message) {
             res.status(500).json({ message: 'Internal Server Error' });

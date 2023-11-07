@@ -26,7 +26,8 @@ router.delete('/deleteproduct', async (req, res, next) => {
 router.post('/addshipment', async (req, res) => {
     await stockObject.addShipment(req, res);
 });
-router.get('/productshipments', async (req, res) => {
+router.get('/productshipments/:productid', async (req, res) => {
+    console.log("Single productid");
     await stockObject.getAllShipmentsForOneProduct(req, res);
 });
 router.get('/allshipments', async (req, res) => {

@@ -10,7 +10,8 @@ const PORT = process.env.PORT;
 const mongose = require('mongoose');
 const body_parser_1 = __importDefault(require("body-parser"));
 //Swagger
-const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swaggerAutogen = require('swagger-autogen');
+const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger-output.json');
 const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
@@ -41,7 +42,7 @@ app
 });
 app.use(express_1.default.json());
 app.use("/", require("./routes/index"));
-app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const allowedOrigins = [
     'http://localhost:5173', // Add any other origins as needed
 ];
