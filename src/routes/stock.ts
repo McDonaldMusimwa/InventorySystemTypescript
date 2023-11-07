@@ -49,9 +49,12 @@ router.post('/addshipment', async (req: Request, res: Response) => {
 
 })
 
-router.get('/productshipments', async (req: Request, res: Response) => {
+router.get('/productshipments/:productid', async (req: Request, res: Response) => {
+    console.log("Single productid")
     await stockObject.getAllShipmentsForOneProduct(req, res);
 })
+
+
 router.get('/allshipments', async (req: Request, res: Response) => {
     
     await stockObject.getAllShipmentsForAllProducts(req, res);
