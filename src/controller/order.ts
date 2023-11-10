@@ -95,8 +95,14 @@ export default class OrderController {
     public async getOrder(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Order']
         try {
-            const response = PurchaseOrder.find()
-            res.status(200).json({ messsage: response })
+            const orderid = req.params.orderid as string;
+            const response =await PurchaseOrder.find({_id:orderid})
+            if (response.length === 0) {
+                res.status(404).json({ message: 'Order not found' });
+            } else {
+                res.status(200).json( response );
+            }
+           
 
         } catch (error) {
             res.status(401).json({ message: error })

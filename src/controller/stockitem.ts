@@ -182,7 +182,7 @@ export default class InventoryController {
             const result = await StockItem.find({ productId: productid })
             
             res.status(200).json(result)
-            console.log('data =>' + result)
+            
 
         } catch (message) {
             res.status(500).json({ message: 'Internal Server Error' })

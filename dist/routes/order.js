@@ -16,7 +16,7 @@ router.patch('/orderid', (req, res) => {
 router.post('/addorder', (req, res) => {
     orderController.addOrder(req, res);
 });
-router.get('/orderid', (req, res) => {
+router.get('getorder/:orderid', (req, res) => {
     orderController.getOrder(req, res);
 });
 module.exports = router;

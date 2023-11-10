@@ -145,7 +145,6 @@ class InventoryController {
             console.log(productid);
             const result = await stockitem_1.default.find({ productId: productid });
             res.status(200).json(result);
-            console.log('data =>' + result);
         }
         catch (message) {
             res.status(500).json({ message: 'Internal Server Error' });
