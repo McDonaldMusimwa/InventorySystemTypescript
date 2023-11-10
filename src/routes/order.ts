@@ -17,7 +17,8 @@ router.post('/addorder', (req: Request, res: Response) => {
     orderController.addOrder(req, res)
 })
 
-router.get('/orderid',(req:Request,res:Response)=>{
+router.get('/getorder/:orderid',(req:Request,res:Response)=>{
+    
     orderController.getOrder(req,res)
 })
 

@@ -83,8 +83,14 @@ class OrderController {
     async getOrder(req, res) {
         //#swagger.tags=['Order']
         try {
-            const response = order_1.default.find();
-            res.status(200).json({ messsage: response });
+            const orderid = req.params.orderid;
+            const response = await order_1.default.find({ _id: orderid });
+            if (response.length === 0) {
+                res.status(404).json({ message: 'Order not found' });
+            }
+            else {
+                res.status(200).json(response);
+            }
         }
         catch (error) {
             res.status(401).json({ message: error });
