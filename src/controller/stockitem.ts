@@ -225,7 +225,7 @@ export default class InventoryController {
     }
 
     public async getAllShipments(req: Request, res: Response): Promise<void> {
-        console.log('here')
+        
         //#swagger.tags=['Shipments']
         try {
 
@@ -233,7 +233,29 @@ export default class InventoryController {
 
             const result = await ShipmentItem.find()
 
-            res.status(200).json(result)
+            const resulte = result.map((product) => {
+                const totalquantity = product.products.reduce((total, shipment) => {
+                    return total + shipment.quantityreceived
+                }, 0)
+                const totalcost = product.products.reduce((total, shipment) => {
+                    return total + shipment.totalcost
+                }, 0)
+
+                const shipments = product.products
+                return {
+                    _id: product._id,
+                    invoicenumber: product.invoicenumber,
+                    datereceived:product.datereceived,
+                    suppliername:product.suppliername,
+                    shipmentdescrition:product.suppliername,
+
+                    totalreceived: totalquantity,
+                    totalcost: totalcost,
+                    shipments: shipments
+                }
+            })
+
+            res.status(200).json(resulte)
 
 
         } catch (message) {
