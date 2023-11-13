@@ -48,7 +48,7 @@ app
 app.use(express.json())
 
 app.use("/", require("./routes/index"));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const allowedOrigins = [
 

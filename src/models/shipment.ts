@@ -1,32 +1,43 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
-
-
-export interface Shipment {
-    productid: string,
+export interface Product {
+    productid: string;
     productname: string;
-    productdescription: string;
     quantityreceived: number;
     cost: number;
     totalcost: number;
-    datereceived: Date;
-    expirydate:Date;
+    expirydate: Date;
 }
 
+export interface ShipmentReceived {
+    invoicenumber: string;
+    datereceived: Date; // Corrected from String to Date
+    suppliername: string;
+    shipmentdescription: string;
+    totalreceived: number;
+    totalcost: number;
+    products: Product[];
+}
 
-const shipmentSchema = new mongoose.Schema<Shipment>({
+const productSchema = new mongoose.Schema<Product>({
     productid: String,
     productname: String,
-    productdescription: String,
     quantityreceived: Number,
     cost: Number,
     totalcost: Number,
-    datereceived: Date,
-    expirydate:Date
+    expirydate: Date,
 });
 
+const shipmentSchema = new mongoose.Schema<ShipmentReceived>({
+    invoicenumber: String,
+    datereceived: Date, // Corrected from String to Date
+    suppliername: String,
+    shipmentdescription: String,
+    totalreceived: Number,
+    totalcost: Number,
+    products: [productSchema],
+});
 
-
-const ShipmentItem: Model<Shipment> = mongoose.model('Shipment', shipmentSchema, 'shipments');
+const ShipmentItem: Model<ShipmentReceived> = mongoose.model('Shipment', shipmentSchema, 'shipments');
 
 export default ShipmentItem;
