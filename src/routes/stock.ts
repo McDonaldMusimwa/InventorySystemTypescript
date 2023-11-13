@@ -14,20 +14,13 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
     }
 
 });
-router.get('/:id', async (req: Request, res: Response) => {
-    console.log("Single productid")
-    await stockObject.getOnShipment(req, res);
-})
 
 router.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
     await stockObject.getproductRange(req, res)
 })
 
 
-router.post('/addshipment', async (req: Request, res: Response) => {
-    console.log("shipment Route activated")
-    await stockObject.addShipment(req,res)
-})
+
 
 router.post('/addproduct', async (req: Request, res: Response, next: NextFunction) => {
     console.log("Add product route")
@@ -42,8 +35,49 @@ router.delete('/deleteproduct', async (req: Request, res: Response, next: NextFu
 
 
 
-router.get('/allshipments', async (req: Request, res: Response) => {
-    
-    await stockObject.getAllShipmentsForAllProducts(req, res);
-});
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

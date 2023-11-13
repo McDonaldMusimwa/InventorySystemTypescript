@@ -224,7 +224,8 @@ export default class InventoryController {
         }
     }
 
-    public async getAllShipmentsForAllProducts(req: Request, res: Response): Promise<void> {
+    public async getAllShipments(req: Request, res: Response): Promise<void> {
+        console.log('here')
         //#swagger.tags=['Shipments']
         try {
 
