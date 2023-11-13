@@ -203,18 +203,18 @@ export default class InventoryController {
     }
 
 
-    public async getAllShipmentsForOneProduct(req: Request, res: Response): Promise<void> {
+    public async getOnShipment(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Shipments']
         try {
 
-            const productid = req.params.productid as string;
-            console.log(productid)
-            if (!productid) {
-                res.status(400).json({ message: 'productid query parameter is required' });
+            const shipmentid = req.params.id as string;
+            console.log(shipmentid)
+            if (!shipmentid) {
+                res.status(400).json({ message: 'shipmentid query parameter is required' });
                 return;
             }
-            console.log(productid)
-            const result = await StockItem.find({ productId: productid })
+            
+            const result = await ShipmentItem.find({ _id: shipmentid })
 
             res.status(200).json(result)
 

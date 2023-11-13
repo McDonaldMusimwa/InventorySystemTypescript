@@ -14,6 +14,10 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
     }
 
 });
+router.get('/:id', async (req: Request, res: Response) => {
+    console.log("Single productid")
+    await stockObject.getOnShipment(req, res);
+})
 
 router.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
     await stockObject.getproductRange(req, res)
@@ -36,10 +40,6 @@ router.delete('/deleteproduct', async (req: Request, res: Response, next: NextFu
 
 
 
-router.get('/productshipments/:productid', async (req: Request, res: Response) => {
-    console.log("Single productid")
-    await stockObject.getAllShipmentsForOneProduct(req, res);
-})
 
 
 router.get('/allshipments', async (req: Request, res: Response) => {
