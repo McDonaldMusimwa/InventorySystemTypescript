@@ -16,38 +16,25 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
-
-
-
-
     await stockObject.getproductRange(req, res)
-
-
 })
 
 
+router.post('/addshipment', async (req: Request, res: Response) => {
+    console.log("shipment Route activated")
+    await stockObject.addShipment(req,res)
+})
 
 router.post('/addproduct', async (req: Request, res: Response, next: NextFunction) => {
-
-
-
-
+    console.log("Add product route")
     await stockObject.addProduct(req, res)
-
-
 })
 
 router.delete('/deleteproduct', async (req: Request, res: Response, next: NextFunction) => {
-
     await stockObject.deleteProduct(req, res)
-
-
 })
 
-router.post('/addshipment', async (req: Request, res: Response) => {
-    await stockObject.addShipment(req, res)
 
-})
 
 router.get('/productshipments/:productid', async (req: Request, res: Response) => {
     console.log("Single productid")

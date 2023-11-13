@@ -3,11 +3,13 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 
 
 export interface Shipment {
+  productid:string;
   productname: string;
   productdescription: string;
   quantityreceived: number;
   cost: number;
   totalcost: number;
+  expirydate:Date;
   datereceived: Date;
 }
 
@@ -26,6 +28,8 @@ const shipmentSchema = new mongoose.Schema<Shipment>({
   cost: Number,
   totalcost: Number,
   datereceived: Date,
+  expirydate:Date
+
 });
 
 const stockSchema = new mongoose.Schema<InventoryItem>({
