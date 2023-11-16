@@ -7,18 +7,23 @@ export default class OrderController {
     public async addOrder(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Order']
         try {
-            const { customername, dateordered, products } = req.body as Order;
+            const { customername, dateordered,contactphone,contactemail, products } = req.body as Order;
 
-            if (!customername || !dateordered || !products || products.length === 0) {
+            if (!customername || !dateordered ||!contactemail ||!contactphone || !products || products.length === 0) {
                 res.status(400).json({ message: 'Enter valid order details with products' });
                 return;
             }
 
+            
             const newOrder: Order = {
                 customername,
                 dateordered,
+                contactphone,
+                contactemail,
                 products: products || [],
             };
+            
+         
 
             const orderItem = new PurchaseOrder(newOrder);
             await orderItem.save();

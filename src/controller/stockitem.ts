@@ -197,13 +197,13 @@ export default class InventoryController {
             } catch (error) {
                 res.status(500).json({ message: 'Error adding shipments to stock', error: error.message });
             }
-        }catch(error){
-            res.status(500).json({messsage:error})
+        } catch (error) {
+            res.status(500).json({ messsage: error })
         }
     }
 
 
-    public async getOnShipment(req: Request, res: Response): Promise<void> {
+    public async getOneShipment(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Shipments']
         try {
 
@@ -213,7 +213,7 @@ export default class InventoryController {
                 res.status(400).json({ message: 'shipmentid query parameter is required' });
                 return;
             }
-            
+
             const result = await ShipmentItem.find({ _id: shipmentid })
 
             res.status(200).json(result)
@@ -225,7 +225,7 @@ export default class InventoryController {
     }
 
     public async getAllShipments(req: Request, res: Response): Promise<void> {
-        
+
         //#swagger.tags=['Shipments']
         try {
 
@@ -245,9 +245,9 @@ export default class InventoryController {
                 return {
                     _id: product._id,
                     invoicenumber: product.invoicenumber,
-                    datereceived:product.datereceived,
-                    suppliername:product.suppliername,
-                    shipmentdescrition:product.suppliername,
+                    datereceived: product.datereceived,
+                    suppliername: product.suppliername,
+                    shipmentdescrition: product.suppliername,
 
                     totalreceived: totalquantity,
                     totalcost: totalcost,
@@ -272,6 +272,27 @@ export default class InventoryController {
         }
     }
 
+    public async getOneProduct(req: Request, res: Response): Promise<void> {
+        try {
+
+            const productid = req.params.id as string;
+            
+            console.log(productid)
+            if (!productid) {
+                res.status(400).json({ message: 'productid query parameter is required' });
+                return;
+            }
+            console.log(productid)
+            const result = await StockItem.find({ productId: productid })
+
+            res.status(200).json(result)
+            console.log('data =>' + result)
+
+        } catch (message) {
+            res.status(500).json({ message: 'Internal Server Error' })
+        }
+
+    }
 }
 
 
