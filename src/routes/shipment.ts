@@ -16,7 +16,7 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 router.get('/:id', async (req: Request, res: Response) => {
     
-    await stockObject.getOnShipment(req, res);
+    await stockObject.getOneShipment(req, res);
 })
 
 

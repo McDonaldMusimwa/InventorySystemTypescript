@@ -6,6 +6,7 @@ const route = Router()
 
 
 route.post('/', async (req: Request, res: Response) => {
+    console.log('where here')
     userController.createUser(req, res)
 });
 

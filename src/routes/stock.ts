@@ -15,6 +15,12 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 
 });
 
+
+router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    await stockObject.getOneProduct(req, res)
+})
+
+
 router.get('/getproductcatalogue', async (req: Request, res: Response, next: NextFunction) => {
     await stockObject.getproductRange(req, res)
 })
