@@ -16,13 +16,13 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 router.get('/:id', async (req: Request, res: Response) => {
     
-    await stockObject.getOneShipment(req, res);
+     stockObject.getOneShipment(req, res);
 })
 
 
 
 router.post('/addshipment', async (req: Request, res: Response) => {
-    console.log("shipment Route activated")
+    console.log('add shipment')
     await stockObject.addShipment(req,res)
 })
 

@@ -40,7 +40,7 @@ export default class InventoryController {
 
     public async addInventory(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Stock']
-        console.log(req.body)
+  
         try {
             const {
                 productId,
@@ -117,7 +117,7 @@ export default class InventoryController {
     }
 
     public async addShipment(req: Request, res: Response): Promise<void> {
-        console.log('Add shipment route')
+        console.log(req.body)
         //#swagger.tags=['Shipments']
         try {
             const {
@@ -156,7 +156,7 @@ export default class InventoryController {
                 products: req.body.products.map(product => ({
                     productid: product.productid,
                     productname: product.productname,
-                    quantityreceived: product.quantity,  // Add the quantityreceived property
+                    quantityreceived: product.quantityreceived,  // Add the quantityreceived property
                     cost: product.cost,
                     totalcost: product.totalcost,
                     expirydate: product.expirydate  // Add the expirydate property
@@ -172,23 +172,27 @@ export default class InventoryController {
             try {
                 // Process each product in parallel
                 await Promise.all(productsToAdd.map(async (product) => {
+                    console.log('Product:', product);
                     const productId = product.productid;
                     let prod = await StockItem.findOne({ productId });
-                    console.log(prod)
+                    console.log('Existing Product:', prod);
+                    
                     const ship = {
-                        productid: product.productid,
-                        productname: product.productname,
-                        productdescription: product.productdescription,  // Include other properties as needed
-                        quantityreceived: product.quantity,
-                        cost: product.cost,
-                        totalcost: product.totalcost,
-                        datereceived: req.body.datereceived,
-                        expirydate: product.expirydate
+                      productid: product.productid,
+                      productname: product.productname,
+                      productdescription: product.productdescription,  // Include other properties as needed
+                      quantityreceived: product.quantityreceived,
+                      cost: product.cost,
+                      totalcost: product.totalcost,
+                      datereceived: req.body.datereceived,
+                      expirydate: product.expirydate
                     };
-
+                  
+                    console.log('Ship:', ship);
+                    
                     prod.shipments.push(ship);
                     await prod.save();
-                }));
+                  }));
 
                 res.status(200).json({
                     message: 'Shipments added successfully'
@@ -264,8 +268,11 @@ export default class InventoryController {
     }
 
     public async getproductRange(req: Request, res: Response): Promise<void> {
+        console.log("Add product route")
+       
         try {
             const result = await NewItem.find()
+           
             res.status(200).json(result)
         } catch (message) {
             res.status(500).json({ message: 'Internal Server Error' })
@@ -283,10 +290,10 @@ export default class InventoryController {
                 return;
             }
             console.log(productid)
-            const result = await StockItem.find({ productId: productid })
+            const result = await StockItem.find({ productid: productid })
 
             res.status(200).json(result)
-            console.log('data =>' + result)
+            
 
         } catch (message) {
             res.status(500).json({ message: 'Internal Server Error' })
