@@ -5,8 +5,8 @@ const PORT = process.env.PORT;
 const mongose = require('mongoose');
 import bodyParser from 'body-parser';
 //Swagger
-const swaggerAutogen = require('swagger-autogen');
-const swaggerUi = require('swagger-ui-express');
+import swaggerAutogen from 'swagger-autogen';
+import SwaggerUI from 'swagger-ui-express'
 const swaggerDocument = require('../swagger-output.json');
 import passport from 'passport';
 import session from 'express-session';
@@ -33,39 +33,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
+const corsOptions = {
+  origin: '*',
+};
 app
-  .use(bodyParser.json())
-  .use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept, Z-Key' // Corrected the headers list
-    );
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Removed spaces
-    next();
-  });
+.use(cors(corsOptions))
+.use(bodyParser.json())
+ 
 app.use(express.json())
 
 app.use("/", require("./routes/index"));
-app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs',SwaggerUI.serve, SwaggerUI.setup(swaggerDocument));
 
-const allowedOrigins = [
 
-  '*', // Add any other origins as needed
-];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
 
-app.use(cors(corsOptions)); // Use the cors middleware with custom options
+
+
 
 
 let db;
