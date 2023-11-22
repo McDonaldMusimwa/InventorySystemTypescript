@@ -8,28 +8,47 @@ import NewItem, { ProductItem } from '../models/productItem';
 
 export default class InventoryController {
     public async addProduct(req: Request, res: Response): Promise<void> {
+       
         try {
             const {
-                productId,
+                productid,
                 productname,
                 unitspercase,
                 description,
 
             } = req.body as ProductItem;
 
-            if (!productId || !productname || !unitspercase) {
+            if (!productid || !productname || !unitspercase || !description) {
                 res.status(400).json({ error: 'Missing required fields' });
             } else {
                 const newProduct: ProductItem = {
-                    productId,
+                    productid,
                     productname,
                     unitspercase,
                     description
                 };
-                //console.log(newProduct)
+
+                
+                const newStockItem ={
+                    productId: req.body.productid,   // Check this property
+                    productname: req.body.productname, // Check this property
+                    totalquantity: 0,
+                    totalcost: 0,
+                    shipments: []
+                }
+
+                console.log(newStockItem)
+            
+                console.log('Received data in backend:', req.body);
+
                 const product = new NewItem(newProduct);
                 await product.save();
-                res.status(201).json({ message: 'Inventory added successfully', inventory: product });
+                console.log('Product saved successfully');
+                
+                const stock = new StockItem(newStockItem);
+                await stock.save();
+                console.log('New Stock saved successfully');
+                res.status(201).json({ message: 'New product added successfully', inventory: product });
             }
 
         } catch {
@@ -290,7 +309,7 @@ export default class InventoryController {
                 return;
             }
             console.log(productid)
-            const result = await StockItem.find({ productid: productid })
+            const result = await StockItem.find({ productId: productid })
 
             res.status(200).json(result)
             

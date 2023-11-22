@@ -1,13 +1,13 @@
-const router = require('express').Router();
 
-import { NextFunction, Request, Response } from 'express';
+
+import { NextFunction, Request, Response, Router } from 'express';
 import StockController from '../controller/stockitem';
 let stockObject = new StockController();
+const router = Router();
 
-
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', async(req: Request, res: Response, next: NextFunction) => {
     try {
-        stockObject.getAllProducts(req, res)
+      await  stockObject.getAllProducts(req, res)
 
     } catch (error) {
         res.status(500).json({ message: 'Internal Server Error First layer' })
@@ -21,6 +21,7 @@ router.get('/getproductcatalogue', async (req: Request, res: Response, next: Nex
 });
 
 router.get('/getoneproduct/:id', async (req: Request, res: Response, next: NextFunction) => {
+    console.log('get one product')
     await stockObject.getOneProduct(req, res);
 });
 

@@ -52,7 +52,7 @@ app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const allowedOrigins = [
 
-  'http://localhost:5173', // Add any other origins as needed
+  '*', // Add any other origins as needed
 ];
 
 const corsOptions = {
