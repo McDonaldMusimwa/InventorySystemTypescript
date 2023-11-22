@@ -7,19 +7,19 @@ export default class OrderController {
     public async addOrder(req: Request, res: Response): Promise<void> {
         //#swagger.tags=['Order']
         try {
-            const { customername, dateordered,contactphone,contactemail, products } = req.body as Order;
-
-            if (!customername || !dateordered ||!contactemail ||!contactphone || !products || products.length === 0) {
+            const { customername, dateordered,customerphone,customeremail, products } = req.body as Order;
+            
+            if (!customername || !dateordered ||!customeremail ||!customerphone || !products || products.length === 0) {
                 res.status(400).json({ message: 'Enter valid order details with products' });
                 return;
             }
-
+          
             
             const newOrder: Order = {
                 customername,
                 dateordered,
-                contactphone,
-                contactemail,
+                customerphone,
+                customeremail,
                 products: products || [],
             };
             
@@ -28,12 +28,12 @@ export default class OrderController {
             const orderItem = new PurchaseOrder(newOrder);
             await orderItem.save();
 
-            const stockItem: any = await Stock.findOne({ productId: 20 })
-            console.log("Item => " + stockItem)
+            console.log(newOrder.products)
 
             for (const product of newOrder.products) {
+                console.log(product)
                 const { productId, quantity } = product;
-
+                console.log(productId,quantity)
                 if (productId && quantity) {
                     const stockItem: any = await Stock.findOne({ productId: productId });
                     console.log(stockItem)

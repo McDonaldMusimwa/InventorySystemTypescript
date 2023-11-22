@@ -6,7 +6,7 @@ const router = Router();
 const orderController = new OrderControler();
 
 router.get('/', (req: Request, res: Response) => {
-    orderController.getAllOrders(req, res)
+   orderController.getAllOrders(req, res)
 })
 router.patch('/orderid', (req: Request, res: Response) => {
     orderController.modifyOrder(req, res)
@@ -17,7 +17,7 @@ router.post('/addorder', (req: Request, res: Response) => {
     orderController.addOrder(req, res)
 })
 
-router.get('/getorder/:orderid',(req:Request,res:Response)=>{
+router.get('/getorder/:orderid', (req:Request,res:Response)=>{
     
     orderController.getOrder(req,res)
 })

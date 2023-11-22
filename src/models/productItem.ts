@@ -5,7 +5,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 
 
 export interface ProductItem {
-    productId: string;
+    productid: string;
     productname: string;
     unitspercase: string;
     description: string;
@@ -13,7 +13,7 @@ export interface ProductItem {
 
 
 const stockSchema = new mongoose.Schema<ProductItem>({
-    productId: String,
+    productid: String,
     productname: String,
     unitspercase: String,
     description: String

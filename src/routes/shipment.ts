@@ -1,11 +1,12 @@
-const router = require('express').Router();
 
-import { NextFunction, Request, Response } from 'express';
+//import  isAuthenticated  from '../auth/is-auth';
+import { NextFunction, Request, Response ,Router} from 'express';
 import StockController from '../controller/stockitem';
+const router = Router();
 let stockObject = new StockController();
 
 
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
+router.get('/',(req: Request, res: Response, next: NextFunction) => {
     try {
         stockObject.getAllShipments(req, res)
 
@@ -21,7 +22,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
 
 
-router.post('/addshipment', async (req: Request, res: Response) => {
+router.post('/addshipment',async (req: Request, res: Response) => {
     console.log('add shipment')
     await stockObject.addShipment(req,res)
 })
