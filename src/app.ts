@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 //Swagger
 import swaggerAutogen from 'swagger-autogen';
 import SwaggerUI from 'swagger-ui-express'
-const swaggerDocument = require('../swagger-output.json');
+import * as swaggerDocument from '../swagger-output.json';
 import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';

@@ -97,40 +97,10 @@
     },
     "/stock/getproductcatalogue": {
       "get": {
-        "tags": [
-          "Stock"
-        ],
         "description": "",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/stock/getoneproduct/{id}": {
-      "get": {
-        "tags": [
-          "Shipments"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -148,7 +118,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "productid": {
+                "productId": {
                   "example": "any"
                 },
                 "productname": {
@@ -181,6 +151,100 @@
       "delete": {
         "tags": [
           "Stock"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stock/addshipment": {
+      "post": {
+        "tags": [
+          "Shipments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "products": {
+                  "example": "any"
+                },
+                "invoicenumber": {
+                  "example": "any"
+                },
+                "datereceived": {
+                  "example": "any"
+                },
+                "suppliername": {
+                  "example": "any"
+                },
+                "shipmentdescription": {
+                  "example": "any"
+                },
+                "totalreceived": {
+                  "example": "any"
+                },
+                "totalcost": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stock/productshipments/{productid}": {
+      "get": {
+        "tags": [
+          "Shipments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "productid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stock/allshipments": {
+      "get": {
+        "tags": [
+          "Shipments"
         ],
         "description": "",
         "responses": {
@@ -236,12 +300,6 @@
                   "example": "any"
                 },
                 "dateordered": {
-                  "example": "any"
-                },
-                "customerphone": {
-                  "example": "any"
-                },
-                "customeremail": {
                   "example": "any"
                 },
                 "products": {
@@ -440,100 +498,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/shipment/": {
-      "get": {
-        "tags": [
-          "Shipments"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/shipment/{id}": {
-      "get": {
-        "tags": [
-          "Shipments"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/shipment/addshipment": {
-      "post": {
-        "tags": [
-          "Shipments"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "invoicenumber": {
-                  "example": "any"
-                },
-                "datereceived": {
-                  "example": "any"
-                },
-                "suppliername": {
-                  "example": "any"
-                },
-                "shipmentdescription": {
-                  "example": "any"
-                },
-                "totalreceived": {
-                  "example": "any"
-                },
-                "totalcost": {
-                  "example": "any"
-                },
-                "products": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
