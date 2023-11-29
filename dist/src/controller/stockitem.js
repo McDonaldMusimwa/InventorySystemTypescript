@@ -224,7 +224,7 @@ class InventoryController {
         }
     }
     async getproductRange(req, res) {
-        console.log("Add product route");
+        //#swagger.tags=['Stock']
         try {
             const result = await productItem_1.default.find();
             res.status(200).json(result);
@@ -234,6 +234,7 @@ class InventoryController {
         }
     }
     async getOneProduct(req, res) {
+        //#swagger.tags=['Shipments']
         try {
             const productid = req.params.id;
             console.log(productid);
