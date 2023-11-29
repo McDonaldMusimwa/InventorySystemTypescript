@@ -1,0 +1,545 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "inventoryApi",
+        "description": "Back end application for inventory management."
+    },
+    "host": "https://inventorymanagement-7i2p.onrender.com",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "",
+            "description": ""
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {},
+    "paths": {
+        "/user/": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "password": {
+                                    "example": "any"
+                                },
+                                "firstname": {
+                                    "example": "any"
+                                },
+                                "lastname": {
+                                    "example": "any"
+                                },
+                                "email": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/stock/": {
+            "get": {
+                "tags": [
+                    "Stock"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/stock/getproductcatalogue": {
+            "get": {
+                "tags": [
+                    "Stock"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/stock/getoneproduct/{id}": {
+            "get": {
+                "tags": [
+                    "Shipments"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/stock/addproduct": {
+            "post": {
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "productid": {
+                                    "example": "any"
+                                },
+                                "productname": {
+                                    "example": "any"
+                                },
+                                "unitspercase": {
+                                    "example": "any"
+                                },
+                                "description": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/stock/deleteproduct": {
+            "delete": {
+                "tags": [
+                    "Stock"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/order/": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/order/orderid": {
+            "patch": {
+                "description": "",
+                "responses": {
+                    "default": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/order/addorder": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "customername": {
+                                    "example": "any"
+                                },
+                                "dateordered": {
+                                    "example": "any"
+                                },
+                                "customerphone": {
+                                    "example": "any"
+                                },
+                                "customeremail": {
+                                    "example": "any"
+                                },
+                                "products": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/order/getorder/{orderid}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "orderid",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/supplier/": {
+            "get": {
+                "tags": [
+                    "Supplier"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/supplier/{supplierId}": {
+            "get": {
+                "tags": [
+                    "Supplier"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "supplierId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Supplier"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "supplierId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "supplier": {
+                                    "example": "any"
+                                },
+                                "contactname": {
+                                    "example": "any"
+                                },
+                                "phone": {
+                                    "example": "any"
+                                },
+                                "email": {
+                                    "example": "any"
+                                },
+                                "adress": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Supplier"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "supplierId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/supplier/addsupplier": {
+            "post": {
+                "tags": [
+                    "Supplier"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "supplier": {
+                                    "example": "any"
+                                },
+                                "contactname": {
+                                    "example": "any"
+                                },
+                                "email": {
+                                    "example": "any"
+                                },
+                                "phone": {
+                                    "example": "any"
+                                },
+                                "adress": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/shipment/": {
+            "get": {
+                "tags": [
+                    "Shipments"
+                ],
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/shipment/{id}": {
+            "get": {
+                "tags": [
+                    "Shipments"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/shipment/addshipment": {
+            "post": {
+                "tags": [
+                    "Shipments"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "invoicenumber": {
+                                    "example": "any"
+                                },
+                                "datereceived": {
+                                    "example": "any"
+                                },
+                                "suppliername": {
+                                    "example": "any"
+                                },
+                                "shipmentdescription": {
+                                    "example": "any"
+                                },
+                                "totalreceived": {
+                                    "example": "any"
+                                },
+                                "totalcost": {
+                                    "example": "any"
+                                },
+                                "products": {
+                                    "example": "any"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    }
+}
