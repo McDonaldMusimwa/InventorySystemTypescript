@@ -1,11 +1,12 @@
 // auth/is-auth.ts
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
+require('dotenv').config();
+const SECRET = process.env.SECRET;
 interface AuthenticatedRequest extends Request {
   userId?: string;
 }
-
+console.log(SECRET)
 class AuthenticationError extends Error {
   statusCode: number;
 
@@ -26,7 +27,7 @@ export default (req: AuthenticatedRequest, res: Response, next: NextFunction) =>
   let decodedToken: any;
 
   try {
-    decodedToken = jwt.verify(token!, 'somesupersecretsecret');
+    decodedToken = jwt.verify(token!, SECRET);
   } catch (err) {
     err.statusCode = 500;
     next(err);

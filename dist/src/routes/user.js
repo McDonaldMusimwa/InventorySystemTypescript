@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     console.log('where here');
     userController.createUser(req, res);
 });
-router.get('/login', (req, res) => {
+router.post('/login', (req, res) => {
     userController.userLogin(req, res);
 });
 module.exports = router;
