@@ -61,10 +61,12 @@ class UserController {
             const userPassword: string = req.body.password;
             const userEmail: string = req.body.email
 
+
             if (!userPassword || !userEmail) {
                 res.status(401).json({ message: 'Please provide relevant data.' })
             }
             const user: any = await User.findOne({ email: userEmail })
+            console.log(user)
             const hashedPassword: any = user.password;
             if (!user) {
                 res.status(500).json({ message: 'User not found' })
@@ -83,6 +85,7 @@ class UserController {
 
                         );
                         console.log(token)
+                        
                         res.status(200).json({token})
                     }
                 }
