@@ -11,7 +11,7 @@ router.post('/', (req: Request, res: Response) => {
     userController.createUser(req, res)
 });
 
-router.get('/login',  (req: Request, res: Response) => {
+router.post('/login',  (req: Request, res: Response) => {
     userController.userLogin(req, res)
 })
 
