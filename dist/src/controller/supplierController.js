@@ -32,9 +32,7 @@ class SupplierController {
     async modifySupplier(req, res) {
         //#swagger.tags=['Supplier']
         try {
-            const supplierId = req.params.supplierId; // Correctly access the supplierId parameter
-            console.log(supplierId);
-            console.log("Hello this is modify route");
+            const id = req.params.supplierId.trim(); // Correctly access the supplierId parameter
             const modifiedSupplier = {
                 supplier: req.body.supplier,
                 contactname: req.body.contactname,
@@ -42,7 +40,7 @@ class SupplierController {
                 email: req.body.email,
                 adress: req.body.adress
             };
-            const supplier = await supplier_1.default.findById(supplierId);
+            const supplier = await supplier_1.default.findOne({ _id: id });
             if (!supplier) {
                 res.status(404).json({ message: "Supplier not found" }); // Handle the case where the supplier is not found
             }
@@ -65,7 +63,8 @@ class SupplierController {
     async deleteSupplier(req, res) {
         //#swagger.tags=['Supplier']
         try {
-            await supplier_1.default.deleteOne({ productId: req.params.supplierId });
+            const id = req.params.supplierId.trim();
+            await supplier_1.default.deleteOne({ _id: id });
             res.status(200).json({ message: "Supplier deleted successfully" });
         }
         catch (error) {
@@ -87,13 +86,17 @@ class SupplierController {
     async getSupplier(req, res) {
         //#swagger.tags=['Supplier']
         try {
-            const response = supplier_1.default.findOne({ _id: req.params.supplerId });
-            const supplier = await response;
-            res.status(200).json({ message: response });
-            return (supplier);
+            const id = req.params.supplierId.trim();
+            const response = await supplier_1.default.findOne({ _id: id });
+            if (!response) {
+                res.status(404).json({ message: 'Supplier not found' });
+                return;
+            }
+            res.status(200).json(response);
         }
-        catch (message) {
-            res.status(401).json({ message: "Internal Server Error" });
+        catch (error) {
+            console.error('Error:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
         }
     }
 }
