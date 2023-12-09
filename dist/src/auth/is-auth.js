@@ -4,6 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+require('dotenv').config();
+const SECRET = process.env.SECRET;
+console.log(SECRET);
 class AuthenticationError extends Error {
     constructor(message) {
         super(message);
@@ -19,7 +22,7 @@ exports.default = (req, res, next) => {
     const token = authHeader.split(' ')[1];
     let decodedToken;
     try {
-        decodedToken = jsonwebtoken_1.default.verify(token, 'somesupersecretsecret');
+        decodedToken = jsonwebtoken_1.default.verify(token, SECRET);
     }
     catch (err) {
         err.statusCode = 500;

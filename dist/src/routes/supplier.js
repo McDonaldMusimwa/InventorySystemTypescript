@@ -11,6 +11,7 @@ route.get('/', (req, res) => {
     supplier.getSuppliers(req, res);
 });
 route.get('/:supplierId', (req, res) => {
+    console.log(' fetch');
     supplier.getSupplier(req, res);
 });
 route.post('/addsupplier', (req, res) => {

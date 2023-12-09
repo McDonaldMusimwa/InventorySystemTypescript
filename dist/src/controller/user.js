@@ -58,6 +58,7 @@ class UserController {
                 res.status(401).json({ message: 'Please provide relevant data.' });
             }
             const user = await user_1.default.findOne({ email: userEmail });
+            console.log(user);
             const hashedPassword = user.password;
             if (!user) {
                 res.status(500).json({ message: 'User not found' });
@@ -69,7 +70,8 @@ class UserController {
                 else {
                     if (result) {
                         const token = jsonwebtoken_1.default.sign({ userId: user._id.toString(), email: user.email }, JWTTOKEN, { expiresIn: '1h' });
-                        res.status(200).json(token);
+                        console.log(token);
+                        res.status(200).json({ token });
                     }
                 }
             });
